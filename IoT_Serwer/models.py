@@ -32,7 +32,6 @@ class CustomModels:
                 MinValueValidator(0),
                 MaxValueValidator(127)
             ]
-            # or Enums?
         )
 
 
@@ -61,13 +60,20 @@ class OnOffDevice(Device):
 class FixedDevice(Device):
     data = models.DecimalField(max_digits=10, decimal_places=4)  # max 999999.9999
 
+
+class ProgramDevice(Device):  # for devices with specified programs
+    program = models.PositiveSmallIntegerField()
+
+
 # Space for new types of Devices
 
 
 class ErrorData(models.Model):
     date = models.DateTimeField()
     # below - needs to consider
-    code = models.IntegerField()                # or Enum,Text
+    code = models.SmallIntegerField()               # or Enum,Text - now
     name = models.TextField(max_length=100)     # TODO: Check if there's smoother way
     group = CustomModels.group_field()          # ^ and if necessary
     room = models.PositiveSmallIntegerField()   # ^^
+
+#class for data from sensor to read last data?
