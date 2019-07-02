@@ -68,7 +68,7 @@ class PercentDevice(Device):
 
 class ErrorData(models.Model):
     date = models.DateTimeField()
-    code = models.SmallIntegerField()      # TODO: Consider other type - Enum,Text - now
+    code = models.SmallIntegerField()      # TODO: Consider other type - Text
     name = models.TextField(max_length=100)
     group = CustomModels.group_field()
     room = models.PositiveSmallIntegerField()
@@ -77,3 +77,5 @@ class ErrorData(models.Model):
 class Sensor(Device):
     data = models.DecimalField(max_digits=10, decimal_places=4)  # max 999999.9999
     manualControl = None
+
+#TODO : Tables for History

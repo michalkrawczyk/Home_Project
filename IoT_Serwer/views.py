@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 
 from .serializers import *
 
@@ -99,7 +99,6 @@ class DevicePercentDetails(APIView):
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# TODO: View for ERROR DATA
 # TODO: Consider post vs put for Devices
 
 
@@ -116,4 +115,6 @@ class SensorDetails(APIView):
         snippet = self.get_object(pk)
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    # TODO: Consider post or solution for changing Sensors.ErrorState - is this necessary?
+
+# TODO : View for ERROR DATA
+
