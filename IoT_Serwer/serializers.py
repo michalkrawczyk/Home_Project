@@ -1,9 +1,8 @@
 from rest_framework import serializers
 
-from .models import RGBDevice, OnOffDevice , FixedDevice , ProgramDevice
+from .models import RGBDevice, OnOffDevice, ProgramDevice, PercentDevice, ErrorData, Sensor
 
 # Todo: Test with views
-# Todo: Check for smoother way
 
 
 class SerializerRGB(serializers.ModelSerializer):
@@ -15,7 +14,7 @@ class SerializerRGB(serializers.ModelSerializer):
             'room',
             'manualControl',
             'errorState',
-            # 'date',
+            'date',
             'red',
             'blue',
             'green'
@@ -31,22 +30,8 @@ class SerializerOnOff(serializers.ModelSerializer):
             'room',
             'manualControl',
             'errorState',
-            # 'date',
+            'date',
             'turnedON'
-        )
-
-
-class SerializerFixed(serializers.ModelSerializer):
-    class Meta:
-        model = FixedDevice
-        fields = (
-            'name',
-            'group',
-            'room',
-            'manualControl',
-            'errorState',
-            # 'date',
-            'data'
         )
 
 
@@ -59,6 +44,46 @@ class SerializerProgrammed(serializers.ModelSerializer):
             'room',
             'manualControl',
             'errorState',
-            # 'date',
+            'date',
             'program'
+        )
+
+
+class SerializerPercent(serializers.ModelSerializer):
+    class Meta:
+        model = PercentDevice
+        fields = (
+            'name',
+            'group',
+            'room',
+            'errorState',
+            'date',
+            'data'
+        )
+
+# Space for new types of Devices
+
+
+class ErrorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ErrorData
+        fields = (
+            'date',
+            'code',
+            'name',
+            'group',
+            'room',
+        )
+
+
+class SensorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sensor
+        fields = (
+            'name',
+            'group',
+            'room',
+            'errorState',
+            'date',
+            'data'
         )

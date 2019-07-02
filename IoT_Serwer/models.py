@@ -41,7 +41,7 @@ class Device(models.Model):
     room = models.PositiveSmallIntegerField()
     manualControl = models.BooleanField(default=False)
     errorState = models.BooleanField(default=False)
-    # date = models.DateTimeField()
+    date = models.DateTimeField()
 
     class Meta:
         abstract = True
@@ -57,23 +57,23 @@ class OnOffDevice(Device):
     turnedON = models.BooleanField(default=False)
 
 
-class FixedDevice(Device):
-    data = models.DecimalField(max_digits=10, decimal_places=4)  # max 999999.9999
-
-
 class ProgramDevice(Device):  # for devices with specified programs
     program = models.PositiveSmallIntegerField()
 
 
+class PercentDevice(Device):
+    data = CustomModels.percentage_field()
 # Space for new types of Devices
 
 
 class ErrorData(models.Model):
     date = models.DateTimeField()
-    # below - needs to consider
-    code = models.SmallIntegerField()               # or Enum,Text - now
-    name = models.TextField(max_length=100)     # TODO: Check if there's smoother way
-    group = CustomModels.group_field()          # ^ and if necessary
-    room = models.PositiveSmallIntegerField()   # ^^
+    code = models.SmallIntegerField()      # TODO: Consider other type - Enum,Text - now
+    name = models.TextField(max_length=100)
+    group = CustomModels.group_field()
+    room = models.PositiveSmallIntegerField()
 
-#class for data from sensor to read last data?
+
+class Sensor(Device):
+    data = models.DecimalField(max_digits=10, decimal_places=4)  # max 999999.9999
+    manualControl = None
