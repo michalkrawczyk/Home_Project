@@ -1,11 +1,10 @@
-from rest_framework import serializers
-
+from rest_framework.serializers import ModelSerializer
 from .models import RGBDevice, OnOffDevice, ProgramDevice, PercentDevice, ErrorData, Sensor
 
 # Todo: Test with views
 
 
-class SerializerRGB(serializers.ModelSerializer):
+class SerializerRGB(ModelSerializer):
     class Meta:
         model = RGBDevice
         fields = (
@@ -21,7 +20,7 @@ class SerializerRGB(serializers.ModelSerializer):
         )
 
 
-class SerializerOnOff(serializers.ModelSerializer):
+class SerializerOnOff(ModelSerializer):
     class Meta:
         model = OnOffDevice
         fields = (
@@ -35,7 +34,7 @@ class SerializerOnOff(serializers.ModelSerializer):
         )
 
 
-class SerializerProgrammed(serializers.ModelSerializer):
+class SerializerProgrammed(ModelSerializer):
     class Meta:
         model = ProgramDevice
         fields = (
@@ -49,7 +48,7 @@ class SerializerProgrammed(serializers.ModelSerializer):
         )
 
 
-class SerializerPercent(serializers.ModelSerializer):
+class SerializerPercent(ModelSerializer):
     class Meta:
         model = PercentDevice
         fields = (
@@ -64,7 +63,7 @@ class SerializerPercent(serializers.ModelSerializer):
 # Space for new types of Devices
 
 
-class ErrorSerializer(serializers.ModelSerializer):
+class ErrorSerializer(ModelSerializer):
     class Meta:
         model = ErrorData
         fields = (
@@ -76,7 +75,7 @@ class ErrorSerializer(serializers.ModelSerializer):
         )
 
 
-class SensorSerializer(serializers.ModelSerializer):
+class SensorSerializer(ModelSerializer):
     class Meta:
         model = Sensor
         fields = (

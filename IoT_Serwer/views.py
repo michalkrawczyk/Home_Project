@@ -1,9 +1,18 @@
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 # from .models import RGBDevice, OnOffDevice , FixedDevice , ProgramDevice
+
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, generics
+from rest_framework import status
+from rest_framework.generics import (
+    ListAPIView,
+    RetrieveAPIView,
+    RetrieveDestroyAPIView,
+    RetrieveUpdateAPIView,
+)
+# from rest_framework.filters import SearchFilter
 
 from .serializers import *
 
@@ -102,19 +111,19 @@ class DevicePercentDetails(APIView):
 # TODO: Consider post vs put for Devices
 
 
-class SensorDetails(APIView):
-    def get_object(self, pk):
-        return get_object_or_404(Sensor)
+class SensorDetails(RetrieveDestroyAPIView):
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
 
-    def get(self, request, pk):
-        snippet = self.get_object(pk)
-        serializer = SensorSerializer(snippet)
-        return Response(serializer.data)
+# TODO : Rewrite Devices
 
-    def delete(self, request, pk):
-        snippet = self.get_object(pk)
-        snippet.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
-# TODO : View for ERROR DATA
 
+class ErrorDataListAPIView(ListAPIView):
+    queryset = ErrorData.objects.all()
+    serializer_class = ErrorSerializer
+
+
+class ErrorDataDetails(RetrieveUpdateAPIView):
+    queryset = ErrorData.objects.all()
+    serializer_class = ErrorSerializer
