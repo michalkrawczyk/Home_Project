@@ -11,7 +11,7 @@ class SerializerRGB(ModelSerializer):
             'room',
             'manualControl',
             'errorState',
-            'date',
+            'lastChange',
             'red',
             'blue',
             'green'
@@ -27,7 +27,7 @@ class SerializerOnOff(ModelSerializer):
             'room',
             'manualControl',
             'errorState',
-            'date',
+            'lastChange',
             'turnedON'
         )
 
@@ -41,7 +41,7 @@ class SerializerProgrammed(ModelSerializer):
             'room',
             'manualControl',
             'errorState',
-            'date',
+            'lastChange',
             'program'
         )
 
@@ -54,7 +54,7 @@ class SerializerPercent(ModelSerializer):
             'group',
             'room',
             'errorState',
-            'date',
+            'lastChange',
             'data'
         )
 
@@ -81,6 +81,6 @@ class SensorSerializer(ModelSerializer):
             'group',
             'room',
             'errorState',
-            'date',
+            'lastChange',
             'data'
         )

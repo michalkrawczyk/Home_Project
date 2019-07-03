@@ -41,7 +41,7 @@ class Device(models.Model):
     room = models.PositiveSmallIntegerField()
     manualControl = models.BooleanField(default=False)
     errorState = models.BooleanField(default=False)
-    date = models.DateTimeField()
+    lastChange = models.DateTimeField(auto_now_add=True, blank=True)
 
     class Meta:
         abstract = True
@@ -67,7 +67,7 @@ class PercentDevice(Device):
 
 
 class ErrorData(models.Model):
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True)
     code = models.SmallIntegerField()      # TODO: Consider other type - Text
     name = models.TextField(max_length=100)
     group = CustomModels.group_field()
@@ -79,3 +79,4 @@ class Sensor(Device):
     manualControl = None
 
 #TODO : Tables for History
+#TODO : Consider rename of date to "lastChange" or even delete it

@@ -11,9 +11,11 @@ urlpatterns = [
     path('API/devicePercent=<pk>', views.DevicePercentDetails.as_view(), name='DevicePercentDetails'),
     path('API/deviceProgrammed=<pk>', views.DeviceProgramDetails.as_view(), name='DeviceProgramDetails'),
 
-    path('API/sensor=<pk>', views.SensorDetails.as_view(), name='SensorDetails'),
-
     path('API/error=<pk>', views.ErrorDataDetails.as_view(), name='ErrorDetails'),
-    path('API/errors', views.ErrorDataListAPIView.as_view(), name='ErrorListAPI'),
+    path('API/errors/', views.ErrorDataListAPIView.as_view(), name='ErrorListAPI'),
+    #For searching API/errors/?<type>=
+
+    path('API/sensor=<pk>', views.SensorDetails.as_view(), name='SensorDetails'),  # Consider other filter
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
+# TODO: Rename urlpatterns for clarity

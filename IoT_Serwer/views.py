@@ -6,7 +6,7 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
     ListCreateAPIView,
 )
-# from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class DeviceRGBDetails(RetrieveUpdateDestroyAPIView):
@@ -33,6 +33,13 @@ class DevicePercentDetails(RetrieveUpdateDestroyAPIView):
 class ErrorDataListAPIView(ListCreateAPIView):
     queryset = ErrorData.objects.all()
     serializer_class = ErrorSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = (
+        'code',
+        'name',
+        'group',
+        'room',
+    )
 
 
 class ErrorDataDetails(RetrieveAPIView):
@@ -43,6 +50,8 @@ class ErrorDataDetails(RetrieveAPIView):
 class SensorDetails(RetrieveDestroyAPIView):
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
+
+
 
 # TODO: Consider post vs put for Devices (now - put)
 # TODO: Rename Views for clarity in urls
