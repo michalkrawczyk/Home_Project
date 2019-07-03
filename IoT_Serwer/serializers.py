@@ -1,8 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import RGBDevice, OnOffDevice, ProgramDevice, PercentDevice, ErrorData, Sensor
 
-# Todo: Test with views
-
 
 class SerializerRGB(ModelSerializer):
     class Meta:
