@@ -6,8 +6,10 @@ from rest_framework.urlpatterns import format_suffix_patterns
 # app_name = "Smart_Home"
 
 urlpatterns = [
-    path('API/deviceRGB=<pk>', views.DeviceRGBDetails.as_view(), name='DeviceRGBDetails'),
+    path('API/deviceRGB=<pk>', views.DeviceRGBDetailsAPI.as_view(), name='DeviceRGBDetails'),
+    path('API/deviceRGB/', views.DeviceAPIListRGB.as_view(), name='DeviceAPIListRGB'),
     path('API/deviceOnOff=<pk>', views.DeviceOnOffDetails.as_view(), name='DeviceOnOffDetails'),
+    path('API/deviceOnOff/', views.DeviceAPIListOnOff.as_view(), name='DeviceAPIListOnOff'),
     path('API/devicePercent=<pk>', views.DevicePercentDetails.as_view(), name='DevicePercentDetails'),
     path('API/deviceProgrammed=<pk>', views.DeviceProgramDetails.as_view(), name='DeviceProgramDetails'),
 
@@ -17,7 +19,6 @@ urlpatterns = [
 
     path('API/sensor=<pk>', views.SensorDetails.as_view(), name='SensorDetails'),  # Consider other filter
 
-    path('API/deviceRGB/', views.DeviceAPIListRGB.as_view(), name='DeviceAPIListRGB')
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
 # TODO: Rename urlpatterns for clarity

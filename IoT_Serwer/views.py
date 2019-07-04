@@ -10,14 +10,25 @@ from rest_framework.generics import (
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-class DeviceRGBDetails(RetrieveUpdateDestroyAPIView):
+class DeviceRGBDetailsAPI(RetrieveUpdateDestroyAPIView):
     queryset = RGBDevice.objects.all()
     serializer_class = SerializerRGB
 
 
-class DeviceAPIListRGB(ListAPIView):
+class DeviceAPIListRGB(ListCreateAPIView):
     queryset = RGBDevice.objects.all()
     serializer_class = SerializerListRGB
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = (
+        'name',
+        'group',
+        'room',
+        'manualControl',
+        'errorState',
+    )
+
+
+# End of RGB Devices
 
 
 class DeviceOnOffDetails(RetrieveUpdateDestroyAPIView):
@@ -25,14 +36,34 @@ class DeviceOnOffDetails(RetrieveUpdateDestroyAPIView):
     serializer_class = SerializerOnOff
 
 
+class DeviceAPIListOnOff(ListCreateAPIView):
+    queryset = OnOffDevice.objects.all()
+    serializer_class = SerializerOnOff
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = (
+        'name',
+        'group',
+        'room',
+        'manualControl',
+        'errorState',
+        'turnedON'
+    )
+
+# End of On/Off Devices
+
+
 class DeviceProgramDetails(RetrieveUpdateDestroyAPIView):
     queryset = ProgramDevice.objects.all()
     serializer_class = SerializerProgrammed
+
+# End of Programmed Devices
 
 
 class DevicePercentDetails(RetrieveUpdateDestroyAPIView):
     queryset = PercentDevice.objects.all()
     serializer_class = SerializerPercent
+
+# End of Percent determined Devices
 
 
 # Space for new types of Device
