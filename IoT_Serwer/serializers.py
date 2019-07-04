@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer
 from .models import RGBDevice, OnOffDevice, ProgramDevice, PercentDevice, ErrorData, Sensor
 
 
+
 class SerializerRGB(ModelSerializer):
     class Meta:
         model = RGBDevice
@@ -15,6 +16,18 @@ class SerializerRGB(ModelSerializer):
             'red',
             'blue',
             'green'
+        )
+
+
+class SerializerListRGB(ModelSerializer):
+    class Meta:
+        model = RGBDevice
+        fields = (
+            'name',
+            'group',
+            'room',
+            'manualControl',
+            'errorState',
         )
 
 
@@ -84,3 +97,5 @@ class SensorSerializer(ModelSerializer):
             'lastChange',
             'data'
         )
+
+# TODO : Consider new serializers,views and urls with pk

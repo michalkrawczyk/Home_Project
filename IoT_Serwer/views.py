@@ -5,6 +5,7 @@ from rest_framework.generics import (
     RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
     ListCreateAPIView,
+    ListAPIView
 )
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -52,8 +53,15 @@ class SensorDetails(RetrieveDestroyAPIView):
     serializer_class = SensorSerializer
 
 
+class DeviceAPIListRGB(ListAPIView):
+    queryset = RGBDevice.objects.all()
+    serializer_class = SerializerListRGB
+
 
 # TODO: Consider post vs put for Devices (now - put)
 # TODO: Rename Views for clarity in urls
+# TODO : Device by rooms,group,Manual Control, Error State - requires new serializers
+# TODO : Sensors by rooms,group,Error State - requires new serializers
+# TODO : Consider - Ordering by date
 # TODO :HTML views ?
 

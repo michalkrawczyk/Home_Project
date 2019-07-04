@@ -16,6 +16,8 @@ urlpatterns = [
     #For searching API/errors/?<type>=
 
     path('API/sensor=<pk>', views.SensorDetails.as_view(), name='SensorDetails'),  # Consider other filter
+
+    path('API/deviceRGB/', views.DeviceAPIListRGB.as_view(), name='DeviceAPIListRGB')
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
 # TODO: Rename urlpatterns for clarity
