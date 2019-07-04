@@ -78,5 +78,5 @@ class Sensor(Device):
     data = models.DecimalField(max_digits=10, decimal_places=4)  # max 999999.9999
     manualControl = None
 
-#TODO : Tables for History
-#TODO : Consider rename of date to "lastChange" or even delete it
+#TODO : Consider - Tables for History
+#TODO : Consider - Blank value data for Sensor (Default 0) and Devices

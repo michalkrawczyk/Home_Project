@@ -130,9 +130,12 @@ class SerializerListPercent(ModelSerializer):
 
 
 class ErrorSerializer(ModelSerializer):
+    id = ReadOnlyField()
+
     class Meta:
         model = ErrorData
         fields = (
+            'id',
             'date',
             'code',
             'name',
@@ -155,5 +158,18 @@ class SensorSerializer(ModelSerializer):
             'data'
         )
 
+
+class SerializerSensorList(ModelSerializer):
+    id = ReadOnlyField()
+
+    class Meta:
+        model = PercentDevice
+        fields = (
+            'id',
+            'name',
+            'group',
+            'room',
+            'errorState',
+            'lastChange',
+        )
 # End of Sensor Serializers
-# TODO : Consider new serializers,views and urls with pk

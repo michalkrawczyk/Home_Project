@@ -112,10 +112,21 @@ class SensorDetails(RetrieveDestroyAPIView):
     serializer_class = SensorSerializer
 
 
-# TODO: Consider post vs put for Devices (now - put)
+class SensorListAPIView(ListCreateAPIView):
+    queryset = Sensor.objects.all()
+    serializer_class = SerializerSensorList
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = (
+        'name',
+        'group',
+        'room',
+        'errorState',
+    )
+
 # TODO: Rename Views for clarity in urls
-# TODO : Device by rooms,group,Manual Control, Error State - requires new serializers + turnedOn for OnOff
 # TODO : Sensors by rooms,group,Error State - requires new serializers
 # TODO : Consider - Ordering by date
-# TODO :HTML views ?
+# TODO : Consider - Delete ErrorDataDetails and expand ErrorDataListAPIView by filter 'id'
+# TODO :HTML/CSS views ?
+# TODO :Permissions
 
