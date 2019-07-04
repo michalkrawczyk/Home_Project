@@ -5,7 +5,6 @@ from rest_framework.generics import (
     RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
     ListCreateAPIView,
-    ListAPIView
 )
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -38,7 +37,7 @@ class DeviceOnOffDetails(RetrieveUpdateDestroyAPIView):
 
 class DeviceAPIListOnOff(ListCreateAPIView):
     queryset = OnOffDevice.objects.all()
-    serializer_class = SerializerOnOff
+    serializer_class = SerializerListOnOff
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = (
         'name',
@@ -56,6 +55,18 @@ class DeviceProgramDetails(RetrieveUpdateDestroyAPIView):
     queryset = ProgramDevice.objects.all()
     serializer_class = SerializerProgrammed
 
+
+class DeviceAPIListProgrammed(ListCreateAPIView):
+    queryset = ProgramDevice.objects.all()
+    serializer_class = SerializerListProgrammed
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = (
+        'name',
+        'group',
+        'room',
+        'manualControl',
+        'errorState',
+    )
 # End of Programmed Devices
 
 
@@ -63,6 +74,18 @@ class DevicePercentDetails(RetrieveUpdateDestroyAPIView):
     queryset = PercentDevice.objects.all()
     serializer_class = SerializerPercent
 
+
+class DeviceAPIListPercent(ListCreateAPIView):
+    queryset = PercentDevice.objects.all()
+    serializer_class = SerializerListPercent
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = (
+        'name',
+        'group',
+        'room',
+        'manualControl',
+        'errorState',
+    )
 # End of Percent determined Devices
 
 
