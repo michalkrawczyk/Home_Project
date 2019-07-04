@@ -15,6 +15,11 @@ class DeviceRGBDetails(RetrieveUpdateDestroyAPIView):
     serializer_class = SerializerRGB
 
 
+class DeviceAPIListRGB(ListAPIView):
+    queryset = RGBDevice.objects.all()
+    serializer_class = SerializerListRGB
+
+
 class DeviceOnOffDetails(RetrieveUpdateDestroyAPIView):
     queryset = OnOffDevice.objects.all()
     serializer_class = SerializerOnOff
@@ -53,14 +58,9 @@ class SensorDetails(RetrieveDestroyAPIView):
     serializer_class = SensorSerializer
 
 
-class DeviceAPIListRGB(ListAPIView):
-    queryset = RGBDevice.objects.all()
-    serializer_class = SerializerListRGB
-
-
 # TODO: Consider post vs put for Devices (now - put)
 # TODO: Rename Views for clarity in urls
-# TODO : Device by rooms,group,Manual Control, Error State - requires new serializers
+# TODO : Device by rooms,group,Manual Control, Error State - requires new serializers + turnedOn for OnOff
 # TODO : Sensors by rooms,group,Error State - requires new serializers
 # TODO : Consider - Ordering by date
 # TODO :HTML views ?

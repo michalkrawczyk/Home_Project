@@ -1,6 +1,5 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, ReadOnlyField
 from .models import RGBDevice, OnOffDevice, ProgramDevice, PercentDevice, ErrorData, Sensor
-
 
 
 class SerializerRGB(ModelSerializer):
@@ -20,15 +19,20 @@ class SerializerRGB(ModelSerializer):
 
 
 class SerializerListRGB(ModelSerializer):
+    id = ReadOnlyField()
+
     class Meta:
         model = RGBDevice
         fields = (
+            'id',
             'name',
             'group',
             'room',
             'manualControl',
             'errorState',
         )
+
+# End of RGB Devices
 
 
 class SerializerOnOff(ModelSerializer):
@@ -45,6 +49,24 @@ class SerializerOnOff(ModelSerializer):
         )
 
 
+class SerializerListOnOff(ModelSerializer):
+    id = ReadOnlyField()
+
+    class Meta:
+        model = OnOffDevice
+        fields = (
+            'id',
+            'name',
+            'group',
+            'room',
+            'manualControl',
+            'errorState',
+            'turnedON'
+        )
+
+# End of On/Off Devices
+
+
 class SerializerProgrammed(ModelSerializer):
     class Meta:
         model = ProgramDevice
@@ -59,6 +81,23 @@ class SerializerProgrammed(ModelSerializer):
         )
 
 
+class SerializerListProgrammed(ModelSerializer):
+    id = ReadOnlyField()
+
+    class Meta:
+        model = ProgramDevice
+        fields = (
+            'id',
+            'name',
+            'group',
+            'room',
+            'manualControl',
+            'errorState',
+        )
+
+# End of Programmed Devices
+
+
 class SerializerPercent(ModelSerializer):
     class Meta:
         model = PercentDevice
@@ -71,6 +110,22 @@ class SerializerPercent(ModelSerializer):
             'data'
         )
 
+
+class SerializerListPercent(ModelSerializer):
+    id = ReadOnlyField()
+
+    class Meta:
+        model = PercentDevice
+        fields = (
+            'id',
+            'name',
+            'group',
+            'room',
+            'manualControl',
+            'errorState',
+        )
+
+# End of Percent determined Devices
 # Space for new types of Devices
 
 
@@ -85,6 +140,8 @@ class ErrorSerializer(ModelSerializer):
             'room',
         )
 
+# End of ErrorData Serializers
+
 
 class SensorSerializer(ModelSerializer):
     class Meta:
@@ -98,4 +155,5 @@ class SensorSerializer(ModelSerializer):
             'data'
         )
 
+# End of Sensor Serializers
 # TODO : Consider new serializers,views and urls with pk
