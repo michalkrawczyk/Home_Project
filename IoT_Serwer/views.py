@@ -129,4 +129,4 @@ class SensorListAPIView(ListCreateAPIView):
 # TODO : Consider - Delete ErrorDataDetails and expand ErrorDataListAPIView by filter 'id'
 # TODO :HTML/CSS views ?
 # TODO :Permissions
-
+# TODO: Consider - ListAPIView instead of ListCreateAPIView

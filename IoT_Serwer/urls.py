@@ -16,7 +16,7 @@ urlpatterns = [
     path('API/devicePercent/', views.DeviceAPIListPercent.as_view(), name='DeviceAPIListPercent'),
 
     path('API/error=<pk>', views.ErrorDataDetails.as_view(), name='ErrorDetails'),
-    path('API/errors/', views.ErrorDataListAPIView.as_view(), name='ErrorListAPI'),
+    path('API/error/', views.ErrorDataListAPIView.as_view(), name='ErrorListAPI'),
     #For searching API/errors/?<field_name>=
 
     path('API/sensor=<pk>', views.SensorDetails.as_view(), name='SensorDetails'),
