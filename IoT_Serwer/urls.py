@@ -6,6 +6,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 # app_name = "Smart_Home"
 
 urlpatterns = [
+    path('API/rooms/', views.RoomListAPI.as_view(), name='RoomListAPI'),
+
     path('API/deviceRGB=<pk>', views.DeviceRGBDetailsAPI.as_view(), name='DeviceRGBDetails'),
     path('API/deviceRGB/', views.DeviceAPIListRGB.as_view(), name='DeviceAPIListRGB'),
     path('API/deviceOnOff=<pk>', views.DeviceOnOffDetails.as_view(), name='DeviceOnOffDetails'),
@@ -15,7 +17,6 @@ urlpatterns = [
     path('API/devicePercent=<pk>', views.DevicePercentDetails.as_view(), name='DevicePercentDetails'),
     path('API/devicePercent/', views.DeviceAPIListPercent.as_view(), name='DeviceAPIListPercent'),
 
-    path('API/error=<pk>', views.ErrorDataDetails.as_view(), name='ErrorDetails'),
     path('API/error/', views.ErrorDataListAPIView.as_view(), name='ErrorListAPI'),
     #For searching API/errors/?<field_name>=
 

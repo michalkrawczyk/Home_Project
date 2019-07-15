@@ -1,20 +1,33 @@
 from .serializers import *
 
 from rest_framework.generics import (
-    RetrieveDestroyAPIView,
-    RetrieveAPIView,
-    RetrieveUpdateDestroyAPIView,
     ListCreateAPIView,
+    ListAPIView,
+    RetrieveUpdateAPIView,
+    RetrieveAPIView,
 )
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 
 
-class DeviceRGBDetailsAPI(RetrieveUpdateDestroyAPIView):
+class RoomListAPI(ListAPIView):
+    queryset = Room.objects.all()
+    serializer_class = SerializerRoom
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = (
+        'id',
+        'name',
+        'enabled',
+    )
+
+
+
+class DeviceRGBDetailsAPI(RetrieveUpdateAPIView):
     queryset = RGBDevice.objects.all()
     serializer_class = SerializerRGB
 
 
-class DeviceAPIListRGB(ListCreateAPIView):
+class DeviceAPIListRGB(ListAPIView):
     queryset = RGBDevice.objects.all()
     serializer_class = SerializerListRGB
     filter_backends = (DjangoFilterBackend,)
@@ -30,12 +43,12 @@ class DeviceAPIListRGB(ListCreateAPIView):
 # End of RGB Devices
 
 
-class DeviceOnOffDetails(RetrieveUpdateDestroyAPIView):
+class DeviceOnOffDetails(RetrieveUpdateAPIView):
     queryset = OnOffDevice.objects.all()
     serializer_class = SerializerOnOff
 
 
-class DeviceAPIListOnOff(ListCreateAPIView):
+class DeviceAPIListOnOff(ListAPIView):
     queryset = OnOffDevice.objects.all()
     serializer_class = SerializerListOnOff
     filter_backends = (DjangoFilterBackend,)
@@ -51,12 +64,12 @@ class DeviceAPIListOnOff(ListCreateAPIView):
 # End of On/Off Devices
 
 
-class DeviceProgramDetails(RetrieveUpdateDestroyAPIView):
+class DeviceProgramDetails(RetrieveUpdateAPIView):
     queryset = ProgramDevice.objects.all()
     serializer_class = SerializerProgrammed
 
 
-class DeviceAPIListProgrammed(ListCreateAPIView):
+class DeviceAPIListProgrammed(ListAPIView):
     queryset = ProgramDevice.objects.all()
     serializer_class = SerializerListProgrammed
     filter_backends = (DjangoFilterBackend,)
@@ -70,12 +83,12 @@ class DeviceAPIListProgrammed(ListCreateAPIView):
 # End of Programmed Devices
 
 
-class DevicePercentDetails(RetrieveUpdateDestroyAPIView):
+class DevicePercentDetails(RetrieveUpdateAPIView):
     queryset = PercentDevice.objects.all()
     serializer_class = SerializerPercent
 
 
-class DeviceAPIListPercent(ListCreateAPIView):
+class DeviceAPIListPercent(ListAPIView):
     queryset = PercentDevice.objects.all()
     serializer_class = SerializerListPercent
     filter_backends = (DjangoFilterBackend,)
@@ -93,26 +106,23 @@ class DeviceAPIListPercent(ListCreateAPIView):
 class ErrorDataListAPIView(ListCreateAPIView):
     queryset = ErrorData.objects.all()
     serializer_class = ErrorSerializer
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
     filterset_fields = (
-        'code',
-        'name',
-        'group',
-        'room',
+         'id',
+         'name',
+         'group',
+         'room',
+         'code'
     )
+    ordering = ('-date',)
 
 
-class ErrorDataDetails(RetrieveAPIView):
-    queryset = ErrorData.objects.all()
-    serializer_class = ErrorSerializer
-
-
-class SensorDetails(RetrieveDestroyAPIView):
+class SensorDetails(RetrieveAPIView):
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
 
 
-class SensorListAPIView(ListCreateAPIView):
+class SensorListAPIView(ListAPIView):
     queryset = Sensor.objects.all()
     serializer_class = SerializerSensorList
     filter_backends = (DjangoFilterBackend,)
@@ -124,9 +134,6 @@ class SensorListAPIView(ListCreateAPIView):
     )
 
 # TODO: Rename Views for clarity in urls
-# TODO : Sensors by rooms,group,Error State - requires new serializers
 # TODO : Consider - Ordering by date
-# TODO : Consider - Delete ErrorDataDetails and expand ErrorDataListAPIView by filter 'id'
 # TODO :HTML/CSS views ?
-# TODO :Permissions
-# TODO: Consider - ListAPIView instead of ListCreateAPIView
+# TODO : Future: Permissions

@@ -1,5 +1,21 @@
 from rest_framework.serializers import ModelSerializer, ReadOnlyField
-from .models import RGBDevice, OnOffDevice, ProgramDevice, PercentDevice, ErrorData, Sensor
+from .models import (
+    Room,
+    RGBDevice, OnOffDevice, ProgramDevice, PercentDevice, ErrorData, Sensor
+)
+
+
+class SerializerRoom(ModelSerializer):
+    id = ReadOnlyField()
+
+    class Meta:
+        model = Room
+        fields = (
+            'id',
+            'name',
+            'enabled'
+        )
+# End of Rooms
 
 
 class SerializerRGB(ModelSerializer):

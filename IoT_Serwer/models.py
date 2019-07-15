@@ -35,10 +35,18 @@ class CustomModels:
         )
 
 
+class Room(models.Model):
+    name = models.TextField(max_length=100)
+    enabled = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.pk) + " - " + self.name
+
+
 class Device(models.Model):
     name = models.TextField(max_length=100)
     group = CustomModels.group_field()
-    room = models.PositiveSmallIntegerField()
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
     manualControl = models.BooleanField(default=False)
     errorState = models.BooleanField(default=False)
     lastChange = models.DateTimeField(auto_now_add=True, blank=True)
@@ -58,7 +66,7 @@ class OnOffDevice(Device):
 
 
 class ProgramDevice(Device):  # for devices with specified programs
-    program = models.PositiveSmallIntegerField()
+    program = models.PositiveSmallIntegerField(default=0)
 
 
 class PercentDevice(Device):
@@ -68,15 +76,18 @@ class PercentDevice(Device):
 
 class ErrorData(models.Model):
     date = models.DateTimeField(auto_now_add=True)
-    code = models.SmallIntegerField()      # TODO: Consider other type - Text
+    code = models.SmallIntegerField()
     name = models.TextField(max_length=100)
     group = CustomModels.group_field()
-    room = models.PositiveSmallIntegerField()
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
 
 
 class Sensor(Device):
-    data = models.DecimalField(max_digits=10, decimal_places=4)  # max 999999.9999
+    data = models.DecimalField(
+        max_digits=10,
+        decimal_places=4,
+        default=0
+    )  # max 999999.9999
     manualControl = None
 
-#TODO : Consider - Tables for History
-#TODO : Consider - Blank value data for Sensor (Default 0) and Devices
+#TODO : Future: Tables for History
